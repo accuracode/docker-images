@@ -28,6 +28,7 @@ RUN install-php-extensions \
         imagick \
         sockets \
         rdkafka \
+        imagick \
         xdebug
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"  && \
