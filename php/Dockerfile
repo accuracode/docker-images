@@ -8,6 +8,7 @@ ENV \
         PHP_IDE_CONFIG=serverName=docker
 
 COPY --from=mlocati/php-extension-installer:latest /usr/bin/install-php-extensions /usr/bin/
+COPY --from=composer:latest /usr/bin/composer /usr/bin/
 
 RUN apk add --no-cache \
         bash \
@@ -16,6 +17,7 @@ RUN apk add --no-cache \
 RUN install-php-extensions \
         amqp \
         soap \
+        bz2 \
         zip \
         bcmath \
         exif \
@@ -34,8 +36,8 @@ RUN install-php-extensions \
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"  && \
         echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
         echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-        echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini
+        echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+        mkdir /workspace && \
+        chown -R www-data:www-data /workspace
 
-WORKDIR /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html
+WORKDIR /workspace
