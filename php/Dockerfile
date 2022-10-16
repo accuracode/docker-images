@@ -11,6 +11,7 @@ COPY --from=mlocati/php-extension-installer:latest /usr/bin/install-php-extensio
 COPY --from=composer:latest /usr/bin/composer /usr/bin/
 
 RUN apk add --no-cache \
+        git \
         bash \
         nano
 
