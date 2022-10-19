@@ -32,6 +32,10 @@ RUN install-php-extensions \
         sockets \
         rdkafka \
         imagick \
+        protobuf \
+        grpc \
+        protobuf \
+        grpc \
         xdebug
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"  && \
