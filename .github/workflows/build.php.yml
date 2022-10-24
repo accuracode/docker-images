@@ -24,7 +24,7 @@ jobs:
         bundle: ["cli", "fpm"]
 
     name: PHP ${{ matrix.php }}-${{ matrix.bundle }}
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
