@@ -22,9 +22,8 @@ jobs:
       matrix:
         php: ["7.4", "8.0", "8.1"]
         bundle: ["cli", "fpm"]
-        platform: ["linux/amd64", "linux/arm64"]
 
-    name: PHP ${{ matrix.php }}-${{ matrix.bundle }} (${{ matrix.platform }})
+    name: PHP ${{ matrix.php }}-${{ matrix.bundle }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -61,7 +60,7 @@ jobs:
             BASE_TAG=${{ env.image-tag }}
           file: ./php/Dockerfile
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.ghcr-image }}:${{ env.ghcr-image }}
